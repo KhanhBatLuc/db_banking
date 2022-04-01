@@ -32,9 +32,6 @@ module.exports = {
       sex: {
         type: Sequelize.STRING,
       },
-      userName: {
-        type: Sequelize.STRING,
-      },
       passWord: {
         type: Sequelize.STRING,
       },

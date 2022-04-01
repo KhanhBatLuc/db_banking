@@ -161,7 +161,7 @@ const register = async (req, res) => {
           if (data) {
             db.CreditCard.create({
               numberCard: body.numberCard,
-              money: body.money,
+              money: 0,
               userId: data.dataValues.id,
             })
               .then((card) => {
