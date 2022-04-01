@@ -37,7 +37,6 @@ exports.validate = (method) => {
           .exists(),
         body("phone", "phone fails ").exists().notEmpty(),
         body("sex", "sex fails ").exists().notEmpty(),
-        body("userName", "userName fails ").exists().notEmpty(),
         body("passWord", "passWord fails ").exists().notEmpty(),
         body("numberCard", "numberCard fails ")
           .notEmpty()

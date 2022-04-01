@@ -25,6 +25,11 @@ router.get(
   transactionController.showDetailTransaction
 );
 
+router.get(
+  "/ad/show-by-day",
+  verifyTokenAdmin,
+  transactionController.showByDay
+);
 router.get("/show-by-day", verifyToken, transactionController.showByDay);
 
 export const transactionRouter = router;

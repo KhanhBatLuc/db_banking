@@ -18,6 +18,7 @@ module.exports = (sequelize, DataTypes) => {
       description: DataTypes.STRING,
       type: DataTypes.STRING,
       transactionPee: DataTypes.STRING,
+      date: DataTypes.STRING,
     },
     {
       timestamps: true,

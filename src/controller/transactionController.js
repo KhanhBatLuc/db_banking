@@ -52,6 +52,7 @@ const sendMoney = async (req, res) => {
           description: body.description,
           type: "CK",
           transactionPee: 0,
+          date: body.date,
         });
 
         await db.CreditCard.update(
@@ -171,10 +172,18 @@ const showDetailTransaction = async (req, res) => {
 const showByDay = async (req, res) => {
   try {
     const day = req.query.day;
+    const id = req.query.id;
     // moment(day).locale("vi").format("YYYY-MM-DD HH:mm:ss");
+    if (id) {
+      const user = await db.Transaction.findAll({
+        where: {
+          [Op.or]: [{ date: day }, { id: id }],
+        },
+      });
+    }
     const data = await db.Transaction.findAll({
       where: {
-        createdAt: new Date(day),
+        date: day,
       },
     });
     if (data) {
