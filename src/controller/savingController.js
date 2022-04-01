@@ -81,6 +81,7 @@ const sendSaving = async (req, res) => {
             moneySaving: moneySend,
             description: body.description,
             typeRate: body.typeRate,
+            date: body.date,
           });
         }
       }
@@ -128,6 +129,65 @@ const sendSaving = async (req, res) => {
   }
 };
 
+/// rut
+const receiveSaving = async (req, res) => {
+  try {
+  } catch (error) {
+    return res
+      .status(statusResponse.STATUS_CONFLICT)
+      .json(
+        statusResponse.createResponse(
+          statusResponse.FAILED,
+          "Loi o day" + error
+        )
+      );
+  }
+};
+
+const showSaving = async (req, res) => {
+  try {
+    const id = req.query.id;
+    if (id) {
+      const saving = await db.Saving.findOne({
+        where: {
+          idUser: id,
+        },
+      });
+
+      if (saving) {
+        return res.status(200).json(
+          statusResponse.createResponse(statusResponse.SUCCESS, {
+            data: saving,
+          })
+        );
+      } else {
+        return res
+          .status(statusResponse.STATUS_NOT_FOUND)
+          .json(
+            statusResponse.createResponse(statusResponse.FAILED, "not found")
+          );
+      }
+    } else {
+      return res
+        .status(statusResponse.STATUS_NOT_FOUND)
+        .json(
+          statusResponse.createResponse(statusResponse.FAILED, "not found")
+        );
+    }
+  } catch (error) {
+    return res
+      .status(statusResponse.STATUS_CONFLICT)
+      .json(
+        statusResponse.createResponse(
+          statusResponse.FAILED,
+          "Loi o day" + error
+        )
+      );
+  }
+};
+
 module.exports = {
   sendSaving,
+  receiveSaving,
+  showSaving,
 };

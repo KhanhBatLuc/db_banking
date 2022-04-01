@@ -15,6 +15,7 @@ module.exports = (sequelize, DataTypes) => {
       idTransaction: DataTypes.INTEGER,
       description: DataTypes.STRING,
       typeRate: DataTypes.STRING,
+      date: DataTypes.STRING,
     },
     {
       sequelize,

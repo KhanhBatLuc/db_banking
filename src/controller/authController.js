@@ -52,6 +52,7 @@ const login = async (req, res) => {
         include: [
           {
             model: db.CreditCard,
+            model: db.Saving,
           },
         ],
       });
@@ -83,6 +84,12 @@ const login = async (req, res) => {
             }
           );
           const userCopy = (({ passWord, ...other }) => other)(user.dataValues);
+          // code update saving money this here
+          // let utc = new Date().toJSON().slice(0, 10).replace(/-/g, "-");
+          // if (user.Saving.date === utc) {
+
+          // }
+          // end code update saving money
           return res.status(200).json(
             statusResponse.createResponse(statusResponse.SUCCESS, {
               user: userCopy,

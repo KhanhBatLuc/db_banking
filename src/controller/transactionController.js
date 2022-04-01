@@ -175,11 +175,32 @@ const showByDay = async (req, res) => {
     const id = req.query.id;
     // moment(day).locale("vi").format("YYYY-MM-DD HH:mm:ss");
     if (id) {
-      const user = await db.Transaction.findAll({
+      const idUU = await db.CreditCard.findOne({
         where: {
-          [Op.or]: [{ date: day }, { id: id }],
+          numberCard: id,
         },
       });
+      if (idUU) {
+        const user = await db.Transaction.findAll({
+          where: {
+            [Op.and]: [{ date: day }, { idSend: idUU.userId }],
+            [Op.or]: [{ idReceive: idUU.userId }],
+          },
+        });
+        if (user) {
+          return res.status(200).json(
+            statusResponse.createResponse(statusResponse.SUCCESS, {
+              user: user,
+            })
+          );
+        } else {
+          return res
+            .status(statusResponse.STATUS_NOT_FOUND)
+            .json(
+              statusResponse.createResponse(statusResponse.FAILED, "fails")
+            );
+        }
+      }
     }
     const data = await db.Transaction.findAll({
       where: {

@@ -44,7 +44,6 @@ exports.validate = (method) => {
           .isLength({ min: 12 })
           .isLength({ max: 13 })
           .bail(),
-        body("money", "money fails ").exists().notEmpty(),
       ];
     }
   }

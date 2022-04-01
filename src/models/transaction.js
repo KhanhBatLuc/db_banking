@@ -5,6 +5,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       Transaction.belongsTo(models.Customer, {
         foreignKey: "idSend",
+        targetKey: "id",
         as: "userDataSend",
       });
     }

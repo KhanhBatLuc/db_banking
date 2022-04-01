@@ -11,7 +11,6 @@ module.exports = (sequelize, DataTypes) => {
       });
       Customer.hasMany(models.Transaction, {
         foreignKey: "idSend",
-        targetKey: "id",
         as: "userDataSend",
       });
     }
