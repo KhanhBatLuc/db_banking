@@ -51,9 +51,9 @@ const login = async (req, res) => {
         },
         include: [
           {
-            model: db.CreditCard,
             model: db.Saving,
           },
+          { model: db.CreditCard },
         ],
       });
       if (user) {
