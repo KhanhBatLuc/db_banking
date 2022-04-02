@@ -36,4 +36,10 @@ router.post(
   userController.uploadImg
 );
 
+router.get(
+  "/show-credit",
+  verifyToken,
+  userController.showCredit
+);
+
 export const userRoute = router;

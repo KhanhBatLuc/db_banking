@@ -189,10 +189,69 @@ const activeUser = async (req, res) => {
       );
   }
 };
+
+const showCredit = async (req, res) => {
+  try {
+    const data = await db.CreditCard.findOne({
+      where: {
+        numberCard: req.query.credit,
+      },
+      attributes: {
+        exclude: ["money", "userId", "createdAt", "updatedAt"],
+      },
+
+      include: [
+        {
+          model: db.Customer,
+          attributes: {
+            exclude: [
+              "passWord",
+              "refreshToken",
+              "cccd",
+              "email",
+              "sex",
+              "phone",
+              "status",
+              "roleId",
+              "birthday",
+              "address",
+              "createdAt",
+              "updatedAt",
+            ],
+          },
+        },
+      ],
+    });
+
+    if (data) {
+      return res
+        .status(200)
+        .json(
+          statusResponse.createResponse(statusResponse.SUCCESS, { data: data })
+        );
+    } else {
+      return res
+        .status(statusResponse.STATUS_NOT_FOUND)
+        .json(
+          statusResponse.createResponse(statusResponse.FAILED, "not found")
+        );
+    }
+  } catch (error) {
+    return res
+      .status(statusResponse.STATUS_CONFLICT)
+      .json(
+        statusResponse.createResponse(
+          statusResponse.FAILED,
+          "Loi o day" + error
+        )
+      );
+  }
+};
 module.exports = {
   showAllUser,
   showIndividual,
   updateUser,
   uploadImg,
   activeUser,
+  showCredit,
 };

@@ -22,6 +22,7 @@ exports.ERROR = 2;
 
 exports.STATUS_OK = 200;
 exports.STATUS_CREATED = 200;
+exports.STATUS_SUCCESS = 200;
 exports.STATUS_NO_CONTENT = 204;
 exports.STATUS_UNPROCESSABLE_ENTITY = 422;
 exports.STATUS_NOT_FOUND = 404;
