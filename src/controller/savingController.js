@@ -44,11 +44,12 @@ const sendSaving = async (req, res) => {
           description: body.description,
           type: "GTK",
           transactionPee: 0,
+          date: body.date,
         });
 
         await db.CreditCard.update(
           {
-            money: user.CreditCard.money - moneySend,
+            money: Number(user.CreditCard.money) - Number(moneySend),
           },
           {
             where: {
